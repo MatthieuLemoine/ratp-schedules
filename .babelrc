@@ -1,0 +1,29 @@
+{
+  "presets": [
+    "react",
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": ["last 4 versions"]
+        },
+        "exclude": ["transform-regenerator"]
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "fast-async",
+      {
+        "useRuntimeModule": true
+      }
+    ],
+    ["lodash", { "id": ["recompose", "ramda"] }],
+    [
+      "module-resolver",
+      {
+        "root": ["./src"]
+      }
+    ]
+  ]
+}
