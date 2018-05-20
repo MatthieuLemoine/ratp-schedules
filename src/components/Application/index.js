@@ -6,18 +6,26 @@ import Schedules from 'components/Schedules';
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: stretch;
   min-height: 100vh;
 `;
 
-const Application = ({ onStopSelect, schedules }) => (
+const Spacer = styled.div`
+  min-height: 30vh;
+`;
+
+const Application = ({ onStopSelect, schedules, stop }) => (
   <Container>
+    <Spacer />
     <Search onStopSelect={onStopSelect} />
-    <Schedules schedules={schedules} />
+    {stop ? <Schedules stop={stop} schedules={schedules} /> : null}
   </Container>
 );
+
+Application.defaultProps = {
+  stop: null,
+};
 
 Application.propTypes = {
   onStopSelect: PropTypes.func.isRequired,
@@ -25,6 +33,12 @@ Application.propTypes = {
     destination: PropTypes.string.isRequired,
     times: PropTypes.arrayOf(PropTypes.string).isRequired,
   })).isRequired,
+  stop: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    line: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }),
 };
 
 export default Application;

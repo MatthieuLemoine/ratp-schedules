@@ -1,4 +1,4 @@
-import { compose, withState, withStateHandlers } from 'recompose';
+import { compose, withState, withStateHandlers, mapProps } from 'recompose';
 import algolia from 'algoliasearch';
 import Search from 'components/Search';
 
@@ -26,4 +26,11 @@ export default compose(
       },
     },
   ),
+  mapProps(props => ({
+    ...props,
+    onStopSelect: (stop) => {
+      props.setStops([]);
+      props.onStopSelect(stop);
+    },
+  })),
 )(Search);

@@ -43,6 +43,16 @@ module.exports = webpackMerge(isDev ? devConfig : prodConfig, {
         include: [path.join(__dirname, 'src')],
         use: ['cache-loader', 'babel-loader'],
       },
+      // svg
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader',
+        options: {
+          limit: 100,
+          mimetype: 'image/svg+xml',
+          publicPath: '/',
+        },
+      },
     ],
   },
   plugins: [

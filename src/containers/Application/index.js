@@ -4,10 +4,12 @@ import fetch from 'fetch';
 
 export default compose(
   withState('schedules', 'setSchedules', []),
+  withState('stop', 'setStop', null),
   withStateHandlers(
     {},
     {
       onStopSelect: (state, props) => async (stop) => {
+        props.setStop(stop);
         const { schedules } = await fetch('/api/transportation/schedule', {
           method: 'GET',
           qs: {
@@ -17,7 +19,6 @@ export default compose(
             station: stop.name.replace(/"/g, ''),
           },
         });
-        console.log(schedules);
         props.setSchedules(schedules);
       },
     },

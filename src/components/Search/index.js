@@ -4,9 +4,24 @@ import styled from 'styled-components';
 import SearchInput from 'components/SearchInput';
 import Stops from 'components/Stops';
 
+const algoliaLogo = require('../../search-by-algolia.svg');
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+`;
+
+const ImageContainer = styled.div`
+  max-width: 584px;
+  padding-left: 18px;
+  padding-top: 8px;
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+`;
+const Image = styled.img`
+  height: 16px;
 `;
 
 const Search = ({
@@ -14,6 +29,9 @@ const Search = ({
 }) => (
   <Container>
     <SearchInput onUpdate={onQueryUpdate} query={query} />
+    <ImageContainer>
+      <Image src={algoliaLogo} />
+    </ImageContainer>
     <Stops stops={stops} onSelect={onStopSelect} />
   </Container>
 );
