@@ -1,30 +1,48 @@
 {
-  "presets": [
-    "react",
-    [
-      "env",
-      {
-        "targets": {
-          "browsers": ["last 4 versions"]
-        },
-        "exclude": ["transform-regenerator"]
-      }
-    ]
-  ],
-  "plugins": [
-    "transform-object-rest-spread",
-    [
-      "fast-async",
-      {
-        "useRuntimeModule": true
-      }
-    ],
-    ["lodash", { "id": ["recompose", "ramda"] }],
-    [
-      "module-resolver",
-      {
-        "root": ["./src"]
-      }
-    ]
-  ]
+  "env": {
+    "development": {
+      "plugins": [
+        [
+          "module:fast-async",
+          {
+            "useRuntimeModule": true
+          }
+        ],
+        ["lodash", { "id": ["recompose", "ramda"] }],
+        ["styled-components", { "ssr": true, "displayName": true, "preprocess": false }]
+      ],
+      "presets": [
+        [
+          "next/babel",
+          {
+            "preset-env": {
+              "exclude": ["transform-regenerator"]
+            }
+          }
+        ]
+      ]
+    },
+    "production": {
+      "plugins": [
+        [
+          "module:fast-async",
+          {
+            "useRuntimeModule": true
+          }
+        ],
+        ["lodash", { "id": ["recompose", "ramda"] }],
+        ["styled-components", { "ssr": true, "displayName": true, "preprocess": true }]
+      ],
+      "presets": [
+        [
+          "next/babel",
+          {
+            "preset-env": {
+              "exclude": ["transform-regenerator"]
+            }
+          }
+        ]
+      ]
+    }
+  }
 }

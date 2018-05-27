@@ -1,0 +1,21 @@
+{
+  "name": "RATP schedules",
+  "short_name": "RATP schedules",
+  "icons": [
+    {
+      "src": "/static/favicons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/favicons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ed4c5c",
+  "background_color": "#ffffff",
+  "start_url": "https://matthieulemoine.com/ratp-schedules",
+  "display": "standalone",
+  "orientation": "portrait"
+}

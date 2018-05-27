@@ -1,10 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import SearchInput from 'components/SearchInput';
-import Stops from 'components/Stops';
-
-const algoliaLogo = require('../../search-by-algolia.svg');
+import SearchInput from '../SearchInput';
+import Stops from '../Stops';
 
 const Container = styled.div`
   display: flex;
@@ -30,7 +27,7 @@ const Search = ({
   <Container>
     <SearchInput onUpdate={onQueryUpdate} query={query} />
     <ImageContainer>
-      <Image src={algoliaLogo} />
+      <Image src="/static/search-by-algolia.svg" />
     </ImageContainer>
     <Stops stops={stops} onSelect={onStopSelect} />
   </Container>

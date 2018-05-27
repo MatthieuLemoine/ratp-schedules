@@ -1,8 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Search from 'containers/Search';
-import Schedules from 'components/Schedules';
+import Search from '../../containers/Search';
+import Schedules from '../Schedules';
 
 const Container = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
 import { compose, withState, withStateHandlers } from 'recompose';
-import Application from 'components/Application';
-import fetch from 'fetch';
+import Application from '../../components/Application';
+import fetch from '../../fetch';
 
 export default compose(
   withState('schedules', 'setSchedules', []),

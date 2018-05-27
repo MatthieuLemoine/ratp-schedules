@@ -1,6 +1,6 @@
 import { compose, withState, withStateHandlers, mapProps } from 'recompose';
 import algolia from 'algoliasearch';
-import Search from 'components/Search';
+import Search from '../../components/Search';
 
 const ALGOLIA_APP_ID = '7K6KAWO1TH';
 const ALGOLIA_SEARCH_KEY = 'ccdeb52de7e362edc0203c991901d847';

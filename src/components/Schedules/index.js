@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { getEmoji } from '../../utils';
@@ -48,7 +47,7 @@ const Schedules = ({ schedules, stop }) => (
       {schedules.map(schedule => (
         <Destination key={schedule.destination}>
           <Name>{schedule.destination}</Name>
-          <Times>{schedule.times.map(time => <Time key={time}>{time}</Time>)}</Times>
+          <Times>{schedule.times.map((time, index) => <Time key={index}>{time}</Time>)}</Times>
         </Destination>
       ))}
     </SchedulesContainer>

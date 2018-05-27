@@ -1,12 +1,18 @@
+const next = require('next');
 const express = require('express');
-const path = require('path');
 const logger = require('./logger');
 const transportation = require('./routes/transportation');
 
-const app = express();
 const PORT = process.env.PORT || 8765;
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-app.use(express.static(path.join(__dirname, '..', 'dist')));
-app.use('/api/transportation', transportation);
+app.prepare().then(() => {
+  const server = express();
+  server.use('/api/transportation', transportation);
 
-app.listen(PORT, () => logger.info(`Server listening on port ${PORT}`));
+  server.get('*', (req, res) => handle(req, res));
+
+  server.listen(PORT, () => logger.info(`Server listening on port ${PORT}`));
+});
