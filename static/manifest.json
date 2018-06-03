@@ -15,7 +15,7 @@
   ],
   "theme_color": "#ed4c5c",
   "background_color": "#ffffff",
-  "start_url": "https://matthieulemoine.com/ratp-schedules",
+  "start_url": "https://schedules.matthieulemoine.com",
   "display": "standalone",
   "orientation": "portrait"
 }
