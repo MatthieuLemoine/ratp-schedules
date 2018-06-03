@@ -27,7 +27,7 @@ const Search = ({
   <Container>
     <SearchInput onUpdate={onQueryUpdate} query={query} />
     <ImageContainer>
-      <Image src="/static/search-by-algolia.svg" />
+      <Image src="/static/search-by-algolia.svg" alt="Search by Algolia" />
     </ImageContainer>
     <Stops stops={stops} onSelect={onStopSelect} />
   </Container>

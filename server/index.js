@@ -1,3 +1,4 @@
+const path = require('path');
 const next = require('next');
 const express = require('express');
 const logger = require('./logger');
@@ -11,6 +12,9 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
   server.use('/api/transportation', transportation);
+
+  server.get('/service-worker.js', (req, res) =>
+    app.serveStatic(req, res, path.join(__dirname, '..', '.next', 'service-worker.js')));
 
   server.get('*', (req, res) => handle(req, res));
 
