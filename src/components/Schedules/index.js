@@ -27,6 +27,12 @@ const Times = styled.div`
 
 const Time = styled.div``;
 
+const StopContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 const Stop = styled.div`
   margin-bottom: 15px;
 `;
@@ -37,13 +43,29 @@ const Line = styled.div`
   margin-bottom: 5px;
 `;
 
-const Schedules = ({ schedules, stop }) => (
+const Refresh = styled.div`
+  padding: 15px;
+  padding-right: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Schedules = ({ schedules, stop, refresh }) => (
   <Container>
     <SchedulesContainer>
-      <Stop>
-        <Line>{`${getEmoji(stop.type)} ${stop.line}`}</Line>
-        <StopName>{stop.name.replace(/"/g, '')}</StopName>
-      </Stop>
+      <StopContainer>
+        <Stop>
+          <Line>{`${getEmoji(stop.type)} ${stop.line}`}</Line>
+          <StopName>{stop.name.replace(/"/g, '')}</StopName>
+        </Stop>
+        <Refresh onClick={refresh}>
+          <span style={{ fontSize: 25 }} role="img" aria-label="refresh">
+            🔄
+          </span>
+        </Refresh>
+      </StopContainer>
       {schedules.map(schedule => (
         <Destination key={schedule.destination}>
           <Name>{schedule.destination}</Name>
@@ -65,6 +87,7 @@ Schedules.propTypes = {
     line: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }).isRequired,
+  refresh: PropTypes.func.isRequired,
 };
 
 export default Schedules;

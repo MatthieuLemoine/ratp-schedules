@@ -14,11 +14,13 @@ const Spacer = styled.div`
   min-height: 30vh;
 `;
 
-const Application = ({ onStopSelect, schedules, stop }) => (
+const Application = ({
+  onStopSelect, schedules, stop, refresh,
+}) => (
   <Container>
     <Spacer />
     <Search onStopSelect={onStopSelect} />
-    {stop ? <Schedules stop={stop} schedules={schedules} /> : null}
+    {stop ? <Schedules stop={stop} schedules={schedules} refresh={refresh} /> : null}
   </Container>
 );
 
@@ -38,6 +40,7 @@ Application.propTypes = {
     line: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   }),
+  refresh: PropTypes.func.isRequired,
 };
 
 export default Application;
