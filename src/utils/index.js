@@ -12,3 +12,11 @@ export const getEmoji = (type) => {
       return '🚌';
   }
 };
+
+const PICTO_PATH = '/static/pictos';
+export const getPicto = ({ line, type }) => {
+  if (type === 'METRO') {
+    return `${PICTO_PATH}/M${line}genRVB.svg`;
+  }
+  return `${PICTO_PATH}/${line}genRVB.svg`;
+};

@@ -1,16 +1,10 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { getEmoji } from '../../utils';
+import StopName from '../StopName';
+import { stopType, scheduleType } from '../../utils/types';
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const SchedulesContainer = styled.div`
-  max-width: 584px;
-  width: 50%;
+  margin: 16px;
 `;
 
 const Destination = styled.div`
@@ -33,16 +27,6 @@ const StopContainer = styled.div`
   align-items: center;
 `;
 
-const Stop = styled.div`
-  margin-bottom: 15px;
-`;
-
-const StopName = styled.div``;
-
-const Line = styled.div`
-  margin-bottom: 5px;
-`;
-
 const Refresh = styled.div`
   padding: 15px;
   padding-right: 0;
@@ -54,39 +38,34 @@ const Refresh = styled.div`
 
 const Schedules = ({ schedules, stop, refresh }) => (
   <Container>
-    <SchedulesContainer>
-      <StopContainer>
-        <Stop>
-          <Line>{`${getEmoji(stop.type)} ${stop.line}`}</Line>
-          <StopName>{stop.name.replace(/"/g, '')}</StopName>
-        </Stop>
-        <Refresh onClick={refresh}>
-          <span style={{ fontSize: 25 }} role="img" aria-label="refresh">
-            🔄
-          </span>
-        </Refresh>
-      </StopContainer>
-      {schedules.map(schedule => (
-        <Destination key={schedule.destination}>
-          <Name>{schedule.destination}</Name>
-          <Times>{schedule.times.map((time, index) => <Time key={index}>{time}</Time>)}</Times>
-        </Destination>
-      ))}
-    </SchedulesContainer>
+    <StopContainer>
+      <StopName stop={stop} />
+      <Refresh onClick={refresh}>
+        <span style={{ fontSize: 25 }} role="img" aria-label="refresh">
+          {schedules.length ? '🔄' : '👁'}
+        </span>
+      </Refresh>
+    </StopContainer>
+    {schedules.map(schedule => (
+      <Destination key={schedule.destination}>
+        <Name>{schedule.destination}</Name>
+        <Times>
+          {schedule.times.map((time, index) => (
+            <Time key={index}>{time}</Time>
+          ))}
+        </Times>
+      </Destination>
+    ))}
   </Container>
 );
 
+Schedules.defaultProps = {
+  schedules: [],
+};
+
 Schedules.propTypes = {
-  schedules: PropTypes.arrayOf(PropTypes.shape({
-    destination: PropTypes.string.isRequired,
-    times: PropTypes.arrayOf(PropTypes.string).isRequired,
-  })).isRequired,
-  stop: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    line: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-  }).isRequired,
+  schedules: PropTypes.arrayOf(scheduleType),
+  stop: stopType.isRequired,
   refresh: PropTypes.func.isRequired,
 };
 

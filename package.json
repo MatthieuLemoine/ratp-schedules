@@ -16,8 +16,15 @@
   "license": "MIT",
   "lint-staged": {
     "linters": {
-      "*.js": ["prettier-eslint --write --config .prettierrc", "eslint --fix", "git add"],
-      "*.json": ["prettier-eslint --write --config .prettierrc", "git add"]
+      "*.js": [
+        "prettier-eslint --write --config .prettierrc",
+        "eslint --fix",
+        "git add"
+      ],
+      "*.json": [
+        "prettier-eslint --write --config .prettierrc",
+        "git add"
+      ]
     }
   },
   "devDependencies": {
@@ -32,7 +39,7 @@
     "fast-async": "7.0.6",
     "husky": "^0.14.3",
     "lint-staged": "^7.1.2",
-    "prettier": "^1.12.1",
+    "prettier": "^1.14.3",
     "prettier-eslint-cli": "^4.7.1"
   },
   "dependencies": {
