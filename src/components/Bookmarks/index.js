@@ -27,11 +27,6 @@ const Bookmark = styled.div`
   justify-content: space-between;
 `;
 
-const Empty = styled.div`
-  flex: 1;
-  margin: 0 32px;
-`;
-
 const Bookmarks = ({ bookmarks, onBookmarkSelect, onRemove }) => (
   <Container>
     <Row>
@@ -41,7 +36,6 @@ const Bookmarks = ({ bookmarks, onBookmarkSelect, onRemove }) => (
           <Button onClick={() => onRemove(bookmark)}>🗑</Button>
         </Bookmark>
       ))}
-      <Empty />
     </Row>
   </Container>
 );

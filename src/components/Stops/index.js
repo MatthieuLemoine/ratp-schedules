@@ -13,7 +13,6 @@ const Relative = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 584px;
   padding: 5px 9px 0;
   width: 50%;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);

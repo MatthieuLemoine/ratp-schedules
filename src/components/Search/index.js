@@ -8,15 +8,16 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 5vh;
+  align-self: center;
+  flex: 1;
 `;
 
 const ImageContainer = styled.div`
-  max-width: 584px;
   padding-left: 18px;
   padding-top: 8px;
-  width: 50%;
   display: flex;
   justify-content: flex-end;
+  align-self: flex-end;
 `;
 const Image = styled.img`
   height: 16px;

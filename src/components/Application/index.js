@@ -9,21 +9,20 @@ import Button from '../Button';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   min-height: 100vh;
+  margin: 0 16px;
 `;
 
 const Spacer = styled.div`
   min-height: 25vh;
 `;
 
-const ChildrenContainer = styled.div`
+const CenterColumn = styled.div`
   max-width: 584px;
-  width: 50%;
-  align-self: center;
 `;
 
-const RowSpaced = styled(ChildrenContainer)`
+const RowSpaced = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -44,34 +43,30 @@ const Application = ({
   removeBookmark,
 }) => (
   <Container>
-    {selected.stop || bookmarks.length ? null : <Spacer />}
-    {bookmarks.length ? (
-      <ChildrenContainer>
+    <CenterColumn>
+      {selected.stop || bookmarks.length ? null : <Spacer />}
+      {bookmarks.length ? (
         <Bookmarks
           bookmarks={bookmarks}
           onBookmarkSelect={onStopSelect}
           onRemove={removeBookmark}
         />
-      </ChildrenContainer>
-    ) : null}
-    <Search onStopSelect={onStopSelect} />
-    {selected.stop ? (
-      <ChildrenContainer>
+      ) : null}
+      <Search onStopSelect={onStopSelect} />
+      {selected.stop ? (
         <Schedules
           stop={selected.stop}
           schedules={selected.schedules}
           refresh={refresh(selected.stop)}
           addBookmark={addBookmark}
         />
-      </ChildrenContainer>
-    ) : null}
-    {others.length ? (
-      <RowSpaced>
-        <Label>Other lines:</Label>
-        <Button onClick={refreshAll}>🔄</Button>
-      </RowSpaced>
-    ) : null}
-    <ChildrenContainer>
+      ) : null}
+      {others.length ? (
+        <RowSpaced>
+          <Label>Other lines:</Label>
+          <Button onClick={refreshAll}>🔄</Button>
+        </RowSpaced>
+      ) : null}
       {others.map((other, index) => (
         <Schedules
           key={other.stop.id}
@@ -81,7 +76,7 @@ const Application = ({
           addBookmark={addBookmark}
         />
       ))}
-    </ChildrenContainer>
+    </CenterColumn>
   </Container>
 );
 
