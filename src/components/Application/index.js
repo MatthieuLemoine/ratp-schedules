@@ -2,7 +2,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Search from '../../containers/Search';
 import Schedules from '../Schedules';
-import { itemType } from '../../utils/types';
+import Bookmarks from '../Bookmarks';
+import { itemType, stopType } from '../../utils/types';
+import Button from '../Button';
 
 const Container = styled.div`
   display: flex;
@@ -15,18 +17,13 @@ const Spacer = styled.div`
   min-height: 25vh;
 `;
 
-const SchedulesContainer = styled.div`
+const ChildrenContainer = styled.div`
   max-width: 584px;
   width: 50%;
   align-self: center;
 `;
 
-const Row = styled(SchedulesContainer)`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const RowSpaced = styled(SchedulesContainer)`
+const RowSpaced = styled(ChildrenContainer)`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,52 +31,57 @@ const RowSpaced = styled(SchedulesContainer)`
 
 const Label = styled.div`
   font-weight: bold;
-  padding-left: 16px;
-`;
-
-const Refresh = styled.div`
-  padding: 16px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const Application = ({
-  onStopSelect, selected, refresh, others, refreshAll,
+  onStopSelect,
+  selected,
+  refresh,
+  others,
+  refreshAll,
+  bookmarks,
+  addBookmark,
+  removeBookmark,
 }) => (
   <Container>
-    {selected.stop ? null : <Spacer />}
+    {selected.stop || bookmarks.length ? null : <Spacer />}
+    {bookmarks.length ? (
+      <ChildrenContainer>
+        <Bookmarks
+          bookmarks={bookmarks}
+          onBookmarkSelect={onStopSelect}
+          onRemove={removeBookmark}
+        />
+      </ChildrenContainer>
+    ) : null}
     <Search onStopSelect={onStopSelect} />
     {selected.stop ? (
-      <SchedulesContainer>
+      <ChildrenContainer>
         <Schedules
           stop={selected.stop}
           schedules={selected.schedules}
           refresh={refresh(selected.stop)}
+          addBookmark={addBookmark}
         />
-      </SchedulesContainer>
+      </ChildrenContainer>
     ) : null}
     {others.length ? (
       <RowSpaced>
         <Label>Other lines:</Label>
-        <Refresh onClick={refreshAll}>
-          <span style={{ fontSize: 25 }} role="img" aria-label="refresh">
-            🔄
-          </span>
-        </Refresh>
+        <Button onClick={refreshAll}>🔄</Button>
       </RowSpaced>
     ) : null}
-    <Row>
+    <ChildrenContainer>
       {others.map((other, index) => (
         <Schedules
           key={other.stop.id}
           stop={other.stop}
           schedules={other.schedules}
           refresh={refresh(other.stop, index)}
+          addBookmark={addBookmark}
         />
       ))}
-    </Row>
+    </ChildrenContainer>
   </Container>
 );
 
@@ -89,6 +91,9 @@ Application.propTypes = {
   others: PropTypes.arrayOf(itemType).isRequired,
   refresh: PropTypes.func.isRequired,
   refreshAll: PropTypes.func.isRequired,
+  bookmarks: PropTypes.arrayOf(stopType).isRequired,
+  addBookmark: PropTypes.func.isRequired,
+  removeBookmark: PropTypes.func.isRequired,
 };
 
 export default Application;

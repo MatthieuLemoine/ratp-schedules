@@ -13,6 +13,7 @@
     "no-underscore-dangle": 0,
     "react/no-array-index-key": 0,
     "react/react-in-jsx-scope": 0,
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["next.config.js"]}]
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": ["next.config.js"] }],
+    "jsx-a11y/accessible-emoji": 0
   }
 }

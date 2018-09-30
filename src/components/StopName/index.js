@@ -3,17 +3,18 @@ import { getEmoji, getPicto } from '../../utils';
 import { stopType } from '../../utils/types';
 
 const Stop = styled.div`
-  margin-bottom: 20px;
   display: flex;
   align-items: center;
 `;
 
 const Name = styled.div`
   margin-left: 10px;
+  font-size: 18px;
 `;
 
 const Picto = styled.img`
   width: 30px;
+  min-width: 30px;
 `;
 
 const StopName = ({ stop }) => (

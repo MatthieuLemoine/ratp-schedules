@@ -1,4 +1,4 @@
-import { compose, withState, withHandlers } from 'recompose';
+import { compose, withState, withHandlers, withStateHandlers, lifecycle } from 'recompose';
 import Application from '../../components/Application';
 import fetch from '../../fetch';
 import index from '../../utils/algolia';
@@ -33,9 +33,49 @@ const sortByType = bestType => (stop1, stop2) => {
 export default compose(
   withState('selected', 'setSelected', {}),
   withState('others', 'setOthers', []),
+  withStateHandlers(
+    {
+      bookmarks: [],
+    },
+    {
+      setBookmarks: () => (value = []) => {
+        try {
+          window.localStorage.setItem('bookmarks', JSON.stringify(value));
+        } catch (e) {
+          console.error(e);
+        }
+        return { bookmarks: value };
+      },
+    },
+  ),
+  lifecycle({
+    componentDidMount() {
+      const bookmarks = window.localStorage.getItem('bookmarks');
+      if (bookmarks) {
+        this.props.setBookmarks(JSON.parse(bookmarks));
+      }
+    },
+  }),
   withHandlers({
     updateOthers: props => (value, i) =>
       props.setOthers([...props.others.slice(0, i), value, ...props.others.slice(i + 1)]),
+    addBookmark: ({ bookmarks, setBookmarks }) => (value) => {
+      const found = bookmarks.find(bookmark => bookmark.id === value.id);
+      if (!found) {
+        return setBookmarks([...bookmarks, value]);
+      }
+      return setBookmarks(bookmarks);
+    },
+    removeBookmark: ({ bookmarks, setBookmarks }) => (value) => {
+      const foundIndex = bookmarks.findIndex(bookmark => bookmark.id === value.id);
+      if (foundIndex > -1) {
+        return setBookmarks([
+          ...bookmarks.slice(0, foundIndex),
+          ...bookmarks.slice(foundIndex + 1),
+        ]);
+      }
+      return setBookmarks(bookmarks);
+    },
   }),
   withHandlers({
     onStopSelect: props => async (stop) => {
