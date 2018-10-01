@@ -13,7 +13,6 @@ export default class MyDocument extends Document {
     return (
       <html lang="en-US">
         <Head>
-          <title>RATP schedules</title>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png" />
