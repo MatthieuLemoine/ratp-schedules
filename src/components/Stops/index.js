@@ -5,7 +5,6 @@ import { getEmoji } from '../../utils';
 
 const Relative = styled.div`
   position: relative;
-  width: 100%;
   display: flex;
   justify-content: center;
 `;
@@ -14,9 +13,9 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 5px 9px 0;
-  width: 50%;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
   position: relative;
+  width: 100%;
   top: -25px;
   z-index: 999;
   background-color: white;

@@ -6,7 +6,7 @@ import Stops from '../Stops';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   margin-top: 5vh;
   align-self: center;
   flex: 1;
