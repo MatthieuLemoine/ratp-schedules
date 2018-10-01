@@ -1,4 +1,5 @@
 import { compose, withState, withHandlers, withStateHandlers, lifecycle } from 'recompose';
+import { withRouter } from 'next/router';
 import Application from '../../components/Application';
 import fetch from '../../fetch';
 import index from '../../utils/algolia';
@@ -31,6 +32,7 @@ const sortByType = bestType => (stop1, stop2) => {
 };
 
 export default compose(
+  withRouter,
   withState('selected', 'setSelected', {}),
   withState('others', 'setOthers', []),
   withStateHandlers(
@@ -48,14 +50,6 @@ export default compose(
       },
     },
   ),
-  lifecycle({
-    componentDidMount() {
-      const bookmarks = window.localStorage.getItem('bookmarks');
-      if (bookmarks) {
-        this.props.setBookmarks(JSON.parse(bookmarks));
-      }
-    },
-  }),
   withHandlers({
     updateOthers: props => (value, i) =>
       props.setOthers([...props.others.slice(0, i), value, ...props.others.slice(i + 1)]),
@@ -79,6 +73,8 @@ export default compose(
   }),
   withHandlers({
     onStopSelect: props => async (stop) => {
+      const href = `/?stopId=${stop.providerId}`;
+      props.router.push(href, href, { shallow: true });
       props.setSelected({ stop });
       props.setOthers([]);
       props.setSelected({ stop, schedules: await getSchedule(stop) });
@@ -112,6 +108,23 @@ export default compose(
           props.updateOthers({ stop, schedules }, i);
         }
       }));
+    },
+  }),
+  lifecycle({
+    async componentDidMount() {
+      const bookmarks = window.localStorage.getItem('bookmarks');
+      if (bookmarks) {
+        this.props.setBookmarks(JSON.parse(bookmarks));
+      }
+      const { stopId } = this.props.router.query;
+      if (stopId) {
+        try {
+          const stop = await index.getObject(stopId);
+          this.props.onStopSelect(stop);
+        } catch (e) {
+          console.warn('Unknown stop');
+        }
+      }
     },
   }),
 )(Application);

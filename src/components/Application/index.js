@@ -19,7 +19,8 @@ const Spacer = styled.div`
 `;
 
 const CenterColumn = styled.div`
-  max-width: 584px;
+  width: 584px;
+  max-width: 100%;
 `;
 
 const RowSpaced = styled.div`
