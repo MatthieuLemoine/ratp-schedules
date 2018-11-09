@@ -4,8 +4,29 @@ const { getNextTwoPassages } = require('../../api/ratp');
 
 const router = express.Router();
 
-const toType = type =>
-  (type[type.length - 1].toLowerCase() !== 's' ? `${type}s` : type).toLowerCase();
+const toType = (type) => {
+  switch (type) {
+    case 'RER':
+      return 'rers';
+    case 'METRO':
+      return 'metros';
+    case 'TRAM':
+      return 'tramways';
+    case 'NOCTILIEN':
+      return 'noctiliens';
+    default:
+      return type;
+  }
+};
+
+const toCode = (type, code) => {
+  switch (type) {
+    case 'TRAM':
+      return code.slice(1);
+    default:
+      return code;
+  }
+};
 
 router.get('/schedule', async (req, res, next) => {
   try {
@@ -14,7 +35,7 @@ router.get('/schedule', async (req, res, next) => {
     } = req.query;
     const schedules = await getNextTwoPassages({
       type: toType(type),
-      code,
+      code: toCode(type, code),
       station: slugify(station),
       way,
     });

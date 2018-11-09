@@ -18,5 +18,8 @@ export const getPicto = ({ line, type }) => {
   if (type === 'METRO') {
     return `${PICTO_PATH}/M${line}genRVB.svg`;
   }
+  if (type === 'RER') {
+    return `${PICTO_PATH}/RER${line}genRVB.svg`;
+  }
   return `${PICTO_PATH}/${line}genRVB.svg`;
 };
