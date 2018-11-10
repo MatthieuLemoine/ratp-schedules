@@ -14,6 +14,8 @@ const toType = (type) => {
       return 'tramways';
     case 'NOCTILIEN':
       return 'noctiliens';
+    case 'BUS':
+      return 'bus';
     default:
       return type;
   }
