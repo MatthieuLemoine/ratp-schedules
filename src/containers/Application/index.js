@@ -16,6 +16,9 @@ const getSchedule = stop =>
   }).then(({ schedules }) => schedules);
 
 const sortByType = bestType => (stop1, stop2) => {
+  if (stop1.type === stop2.type) {
+    return stop1.line.localeCompare(stop2.line);
+  }
   if (stop1.type === bestType) {
     return -1;
   }
@@ -28,7 +31,7 @@ const sortByType = bestType => (stop1, stop2) => {
   if (stop2.type === 'METRO') {
     return +1;
   }
-  return stop1.type.localeCompare(stop2.type);
+  return stop1.line.localeCompare(stop2.line);
 };
 
 export default compose(
