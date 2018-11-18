@@ -22,6 +22,18 @@ const toType = (type) => {
 };
 
 const toCode = (type, code) => {
+  if (code === 'Tuc') {
+    return '574';
+  }
+  if (code === 'V5') {
+    return '584';
+  }
+  if (code === 'Tuvim') {
+    return '589';
+  }
+  if (code === 'Orlybus') {
+    return '283';
+  }
   switch (type) {
     case 'TRAM':
       return code.slice(1);
